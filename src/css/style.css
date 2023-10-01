@@ -176,6 +176,9 @@ li .submenu{
 	padding-right: 1rem;
 }
 
+.box img{
+  max-width: 100%;
+}
 
 .list {
   max-height: 0;

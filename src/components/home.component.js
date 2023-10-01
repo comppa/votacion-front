@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import image from "../28494.jpg"
+import image from "../persona.jpg"
 import UserService from "../services/user.service";
 
 export default class Home extends Component {
@@ -32,8 +32,8 @@ export default class Home extends Component {
   render() {
     return (
       <div className="container">
-        <header className="jumbotron">
-          <div className="center-image">
+        <header>
+          <div className="box">
             <img src={image} alt="Logo Campaña" ></img>
           </div>
           <h3>{this.state.content}</h3>

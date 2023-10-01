@@ -12,8 +12,7 @@ export default class Users extends Component {
       users: []
     };
   }
-
-
+  
   componentDidMount() {
     // AuthService.getUsers().then(response => {
     //     this.setState({
