@@ -18,6 +18,7 @@ import RegisterVote from "./components/vote/register-vote.component";
 import Users from "./components/auth/users.component";
 import Graphics from "./components/chart/graphics.component";
 import Tables from "./components/table/table.component";
+import Vote from "./components/vote/vote.component";
 
 class App extends Component {
   constructor(props) {
@@ -253,6 +254,7 @@ class App extends Component {
             <Route path="/users" element={<Users />} />
             <Route path="/graphics" element={<Graphics />} />
             <Route path="/tables" element={<Tables />} />
+            <Route path="/vote" element={<Vote />} />
 
           </Routes>
         </div>

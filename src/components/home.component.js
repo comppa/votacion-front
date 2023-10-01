@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import image from "../28494.jpg"
 import UserService from "../services/user.service";
 
 export default class Home extends Component {
@@ -34,7 +34,7 @@ export default class Home extends Component {
       <div className="container">
         <header className="jumbotron">
           <div className="center-image">
-            <img src="https://piedepagina.mx/wp-content/uploads/2021/03/Va-por-mexico_campesino.jpg" alt="Logo Campaña" ></img>
+            <img src={image} alt="Logo Campaña" ></img>
           </div>
           <h3>{this.state.content}</h3>
         </header>

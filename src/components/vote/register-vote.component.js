@@ -1,7 +1,7 @@
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import React, { useState, useEffect } from 'react';
-
+import {useNavigate} from 'react-router-dom';
 import FormService from "../../services/form.service";
 import AuthService from "../../services/auth.service";
 
@@ -25,12 +25,25 @@ function RegisterVote() {
   });
 
   const [table, setTable] = useState({});
-
+  const [total, setTotal] = useState();
   const handleFormChange = (index, event) => {
     let data = [...voteFields];
     data[index][event.target.name] = event.target.value;
+    var sum = 0;
+    let inputs = document.querySelectorAll('[name^="cant"]');
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value !== "") {
+        sum = sum + parseFloat(inputs[i].value);
+      }
+    }
     setVoteFields(data);
+    setTotal(sum);
   };
+
+  const handleChange = evt => {
+    const total = evt.target.value;
+    // setTotal(total)
+  }
 
   useEffect(() => {
       getAllCandidates();
@@ -63,19 +76,25 @@ function RegisterVote() {
       setVoteFields(candidas);
   }
 
+  const navigate = useNavigate();
+
   const registerVote = (e) => {
     e.preventDefault();
     
     console.log(voteFields);
-    FormService.registerVote(
-      voteFields, table.number, table.local
-    ).then(
-      response => {
-        setMessage({
-          message: response.data.message,
-          successful: true
-        });
-      }).catch(error => setError(error.message));
+    // FormService.registerVote(
+    //   voteFields, table.number, table.local, total
+    // ).then(
+    //   response => {
+    //     setMessage({
+    //       message: response.data.message,
+    //       successful: true
+    //     });
+    //   }).catch(error => setError(error.message));
+    FormService.registerVote(voteFields, table.number, table.local, total);
+    navigate("/vote");
+    window.location.reload();
+    
   }
 
 
@@ -116,8 +135,13 @@ function RegisterVote() {
                 </div>
 
               )
-            })}
+            })
+            }
+            <div className="form-group d-flex float-right">
+              <label htmlFor="total" className="mr-3">Total: <span className="span-total">{total}</span></label>
 
+            </div>
+            
         <button className="btn btn-primary btn-block" onClick={registerVote}>Enviar</button>
       </Form>
       </div>

@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+.mr-5{
+  margin-right: 15px;
+}
+
+.span-total{
+  font-size: 25px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
