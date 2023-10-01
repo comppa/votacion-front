@@ -7,6 +7,7 @@ import AuthService from "../../services/auth.service";
 
 
 
+
 function RegisterVote() {
   const required = value => {
     if (!value) {
@@ -93,10 +94,8 @@ function RegisterVote() {
     //   }).catch(error => setError(error.message));
     FormService.registerVote(voteFields, table.number, table.local, total);
     navigate("/vote");
-    window.location.reload();
-    
+    window.location.reload();    
   }
-
 
 
   return (

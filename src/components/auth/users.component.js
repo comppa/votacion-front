@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import AuthService from "../../services/auth.service";
 
 export default class Users extends Component {
@@ -12,7 +12,7 @@ export default class Users extends Component {
       users: []
     };
   }
-  
+
   componentDidMount() {
     // AuthService.getUsers().then(response => {
     //     this.setState({
@@ -55,42 +55,41 @@ export default class Users extends Component {
           <br/>
           
         </div>
-      <table className="table"  aria-label="a dense table">
-        <thead>
-          <tr>
-            <th>Identificacion</th>
-            <th>Nombre</th>
-            <th>Telefono</th>
-            <th>Usuario</th>
-            <th>Rol</th>
-            <th>Zona</th>
-            <th>Mesa</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table className="table table-responsive"  aria-label="a dense table">
+        <Thead>
+          <Tr>
+            <Th>Identificacion</Th>
+            <Th>Nombre</Th>
+            <Th>Telefono</Th>
+            <Th>Usuario</Th>
+            <Th>Rol</Th>
+            <Th>Zona</Th>
+            <Th>Mesa</Th>
+            <Th>Acciones</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           
           {this.state.users.map((row) => (
-            <tr
-              key={row._id}
+            <Tr              key={row._id}
               scope="row"
             >
-              <td>{row.nit}</td>
-              <td>{row.name}</td>
-              <td>{row.phone}</td>
-              <td>{row.username}</td>
-              <td>{row.role }</td>
-              <td>{row.local}</td>
-              <td>{row.table}</td>
-              <td className="d-flex">
+              <Td>{row.nit}</Td>
+              <Td>{row.name}</Td>
+              <Td>{row.phone}</Td>
+              <Td>{row.username}</Td>
+              <Td>{row.role }</Td>
+              <Td>{row.local}</Td>
+              <Td>{row.table}</Td>
+              <Td className="d-flex">
                 <button className="btn btn-primary">Editar</button>
                 <button className="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
+              </Td>
+            </Tr>
           ))}
           
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
       </div>
 
     );

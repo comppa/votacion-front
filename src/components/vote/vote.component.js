@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import FormService from "../../services/form.service";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 export default class Vote extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class Vote extends Component {
         <div>
           <h3>Voto</h3>
         </div>
-      <table className="table"  aria-label="a dense table">
+      <table className="table table-responsive"  aria-label="a dense table">
         <thead>
           <tr>
             <th>Votos</th>

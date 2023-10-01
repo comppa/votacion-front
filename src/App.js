@@ -172,7 +172,7 @@ class App extends Component {
             <i className="fas fa-bars"></i>
           </button>
 
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <img src={Logo} height="50" alt="Logo"
               loading="lazy" />
           </a>
@@ -197,7 +197,7 @@ class App extends Component {
               </ul>
             </li> */}
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                <a className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="/"
                   id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                   <img src={Logo} className="rounded-circle"
                     height="22" alt="Avatar" loading="lazy" />

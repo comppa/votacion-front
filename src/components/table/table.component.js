@@ -43,6 +43,18 @@ export default class Tables extends Component {
                 <p className="col-10 card__description">{props.vote4}</p>
                 <h2 className="card__price">{props.cant4}</h2>
               </div>
+              <div className="d-flex">
+                <p className="col-10 card__description">{props.vote5}</p>
+                <h3 className="card__price">{props.cant3}</h3>
+              </div>
+              <div className="d-flex">
+                <p className="col-10 card__description">{props.vote6}</p>
+                <h2 className="card__price">{props.cant4}</h2>
+              </div>
+              <div className="d-flex">
+                <p className="col-10 card__description">{props.total}</p>
+                <h2 className="card__price">{props.totaln}</h2>
+              </div>
           </div>
         </div>
       )
@@ -65,6 +77,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 2"
@@ -76,6 +94,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 3"
@@ -87,6 +111,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 4"
@@ -98,6 +128,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 5"
@@ -109,6 +145,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
     
       </div>
@@ -126,6 +168,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 2"
@@ -137,6 +185,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 3"
@@ -148,6 +202,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 4"
@@ -159,6 +219,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 5"
@@ -170,6 +236,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
 
     <this.Card
@@ -182,6 +254,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
       <this.Card
         title="MESA 7"
@@ -193,6 +271,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
     
       </div>
@@ -210,6 +294,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 2"
@@ -221,6 +311,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 3"
@@ -232,6 +328,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 4"
@@ -243,6 +345,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 5"
@@ -254,6 +362,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
 
     <this.Card
@@ -266,6 +380,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
 
     <this.Card
@@ -278,6 +398,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
     
       </div>
@@ -295,6 +421,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 2"
@@ -306,6 +438,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 3"
@@ -317,6 +455,12 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
       />
        <this.Card
         title="MESA 4"
@@ -328,6 +472,13 @@ export default class Tables extends Component {
         cant3 = "12"
         vote4 = "Vicente Fernandez"
         cant4 = "10"
+        vote5 = "Voto en blanco"
+        cant5 = "10"
+        vote6 = "Voto nulo"
+        cant6 = "2"
+        total = "Total"
+        totaln = "20"
+        
       />
     
       </div>
