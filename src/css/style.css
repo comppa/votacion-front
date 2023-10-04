@@ -62,7 +62,7 @@ form .form-group label.vote{
 }
 
 .card {
-  box-shadow: 0 0 10px 5px #e1e5ee;
+  box-shadow: 0 5px 5px 2px #e1e5ee;
   border-radius: 0.2rem;
   min-width: 28rem;
   display: flex;

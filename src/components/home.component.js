@@ -34,7 +34,7 @@ export default class Home extends Component {
       <div className="container">
         <header>
           <div className="box">
-            <img src={image} alt="Logo Campaña" ></img>
+            <img src={image} className="img-fluid shadow-4" alt="Logo Campaña" ></img>
           </div>
           <h3>{this.state.content}</h3>
         </header>

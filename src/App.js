@@ -196,11 +196,15 @@ class App extends Component {
                 </li>
               </ul>
             </li> */}
+            <div className="user-options d-flex">
+              <a href="/" className="line-logout" onClick={this.logOut}>
+                <i className="fas fa-sign-out fa-fw me-1"></i><span>Salir</span>
+                </a>
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="/"
+              <a className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="/"
                   id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                  <img src={Logo} className="rounded-circle"
-                    height="22" alt="Avatar" loading="lazy" />
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" height="30" alt="Logo"
+                  loading="lazy" fluid />
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                   <li>
@@ -208,13 +212,10 @@ class App extends Component {
                     {currentUser.username}
                    </Link>
                   </li>
-                  <li>
-                  <a href="/login" className="dropdown-item" onClick={this.logOut}>
-                    LogOut
-                  </a>
-                  </li>
                 </ul>
               </li>
+            </div>
+
             </ul>
           
         
@@ -226,8 +227,8 @@ class App extends Component {
             <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top" >
               <div className="container-fluid">
               <a className="navbar-brand" href="#">
-                <img src={Logo} height="50" alt="Logo"
-                  loading="lazy" />
+                <img src={Logo} width="50" alt="Logo"
+                  loading="lazy" fluid />
               </a>
                 <ul className="navbar-nav ms-auto d-flex flex-row">
                   <li className="nav-item">
@@ -240,7 +241,7 @@ class App extends Component {
            </nav>
           </div>
           )}
-        <div className="container mr-3 mt-5 pt-4">
+        <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Graphics />} />
