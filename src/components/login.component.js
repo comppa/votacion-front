@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import logo from '../imagelogo.jpeg';
 import AuthService from "../services/auth.service";
 
 import { withRouter } from '../common/with-router';
@@ -11,7 +10,7 @@ const required = value => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
-        This field is required!
+        Este campo es obligatorio
       </div>
     );
   }
@@ -56,28 +55,28 @@ class Login extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
       
-      // AuthService.login(this.state.username, this.state.password).then(
-      //   () => {
-      //     this.props.router.navigate("/profile");
-      //     window.location.reload();
-      //   },
-      //   error => {
-      //     const resMessage =
-      //       (error.response &&
-      //         error.response.data &&
-      //         error.response.data.message) ||
-      //       error.message ||
-      //       error.toString();
+      AuthService.login(this.state.username, this.state.password).then(
+        () => {
+          this.props.router.navigate("/profile");
+          window.location.reload();
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-      //     this.setState({
-      //       success: false,
-      //       message: resMessage
-      //     });
-      //   }
-      // );
-      AuthService.login(this.state.username, this.state.password);
-      this.props.router.navigate("/profile");
-      window.location.reload();
+          this.setState({
+            success: false,
+            message: resMessage
+          });
+        }
+      );
+      // AuthService.login(this.state.username, this.state.password);
+      // this.props.router.navigate("/profile");
+      // window.location.reload();
     } else {
       this.setState({
         success: false
@@ -90,7 +89,7 @@ class Login extends Component {
       <div className="col-md-12">
         <div className="card card-container">
           <img
-            src={logo}
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp"
             alt="profile-img"
             className="profile-img-card"
           />
@@ -127,7 +126,7 @@ class Login extends Component {
 
             <div className="form-group">
               <button
-                className="btn btn-primary btn-block"
+                className="btn btn-block btn-grad  "
                 disabled={this.state.success}
               >
                 {this.state.success && (

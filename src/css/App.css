@@ -1,3 +1,8 @@
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+      
+
 .App {
   text-align: center;
 }
@@ -14,6 +19,16 @@
 .span-total{
   font-size: 25px;
 }
+
+.powerby{
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -118,6 +133,50 @@ hr{
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }
 
+   
+.btn-grad {
+  background-image: linear-gradient(to right, #DC2424 0%, #4A569D  51%, #DC2424  100%);
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  font-weight: 500;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.mt-7{
+  margin-top: 5rem !important;
+}
+
+.mw-60{
+  max-width: 60%;
+}
+
+.mt-14{
+  margin-top: 14rem;
+}
+
+.text-home h2{
+  font-size: 3rem;
+  color: #FF8040;
+}
+
+.text-home p{
+  font-weight: bold;
+}
+
 .profile-img-card {
   width: 96px;
   height: 96px;
@@ -135,8 +194,19 @@ hr{
 }
 
 .line-logout{
-  line-height: 49 px;
-  color:#282c34;
+  line-height: 49px;
+  color:#3b3d43;
+}
+
+.line-logout:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.list-group-item{
+  border-right: 0px !important;
+  border-left: 0px !important;
+  border-top: 0px !important;
 }
 
 @media (min-width: 991.98px) {
@@ -153,7 +223,7 @@ hr{
   left: 0;
   padding: 58px 0 0; /* Height of navbar */
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-  width: 240px;
+  width: 215px;
   z-index: 600;
   }
   

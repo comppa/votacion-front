@@ -6,13 +6,14 @@ import UtilService from "../../services/util.service";
 
 
 
-export default class Tables extends Component {
+export default class Comparasion extends Component {
     constructor(props) {
       super(props);
       this.Card = this.Card.bind(this);
   
       this.state = {
         results: [], 
+        cleveros: [],
         redirect: null,
         userReady: false,
         currentUser: { username: "" }
@@ -24,6 +25,22 @@ export default class Tables extends Component {
         response => {
           this.setState({
             results: response.data.data
+          });
+        },
+        error => {
+          this.setState({
+            content:
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString()
+          });
+        }
+      );
+
+      UtilService.getClaveros().then(
+        response => {
+          this.setState({
+            cleveros: response.data.data
           });
         },
         error => {

@@ -6,14 +6,23 @@ import FormService from "../../services/form.service";
 import AuthService from "../../services/auth.service";
 
 
-
-
 function RegisterVote() {
+
   const required = value => {
     if (!value) {
       return (
         <div className="alert alert-danger" role="alert">
-          This field is required!
+          Ingrese un voto!
+        </div>
+      );
+    }
+  };
+
+  const requiredO = value => {
+    if (!value) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          Ingrese el porque edito el voto!
         </div>
       );
     }
@@ -22,11 +31,18 @@ function RegisterVote() {
     {}
   ]);
   const [error, setError] = useState('');
-  const [message, setMessage] = useState({
+  const [message, setMessage] = useState({message: "",
+    successful: false
   });
 
+  const [observations, setObservations] = useState('');
   const [table, setTable] = useState({});
+  const [usera, setUsera] = useState({});
   const [total, setTotal] = useState();
+  const [isChecked, setIsChecked] = useState(false);
+
+  const navigate = useNavigate();
+
   const handleFormChange = (index, event) => {
     let data = [...voteFields];
     data[index][event.target.name] = event.target.value;
@@ -41,6 +57,15 @@ function RegisterVote() {
     setTotal(sum);
   };
 
+  const handleObservationsChange = (event) => {
+    const  data = event.target.value;
+    setObservations(data);
+  };
+
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   const handleChange = evt => {
     const total = evt.target.value;
     // setTotal(total)
@@ -50,51 +75,54 @@ function RegisterVote() {
       getAllCandidates();
   }, []);
 
-  const getAllCandidates = () => {
-    // FormService.getCandidates().then(response =>{ 
-    //   const candidas = response.data.data;
-    //   setVoteFields(candidas);
-    // }).catch(err => setError(err.message));
-
-    // const currentUser = AuthService.getCurrentUser();
-
-    // FormService.getTableByUser(currentUser.id).then(response =>{ 
-    //   setTable(response.data);
-    // }).catch(err => setError(err.message));
-
-      const candidas = [{name: "Dario Gomez"}, {name: "Vicente Fernandez"}, {name: "Pepito Perez"}, {name: "Peso Pluma"}, {name: "El Charrito Negro"}, {name: "Voto en Blanco"}, {name: "Voto Nulo"}];
-      const users = [{nit: '102547485', name:'Juan Mejia', phone:'3201144455', username: 'seitaj', role:'testigo', local: 'La Me', table: "1"},
-                    {nit: '102458778', name:'Pedro Portela', phone:'3255658457', username: 'pedropor', role:'admin', local: '', table: ""},
-                    {nit: '157858444', name:'Candidato 2', phone:'3269874522', username: 'candidateg', role:'candidate', local: '', table: ""},
-                    {nit: '120121584', name:'Fernando Mre', phone:'3201144455', username: 'fernad', role:'testigo', local: 'La Me', table: "2"},
-                    {nit: '120041257', name:'Dario Gomez', phone:'3204445454', username: 'dariogo', role:'testigo', local: 'La re', table: "1"},
-                    {nit: '102477542', name:'Los inquietos', phone:'3247451211', username: 'losinqui', role:'testigo', local: 'La re', table: "2"},
-                    {nit: '102545445', name:'Kaleth Morales', phone:'3204589865', username: 'kaleth', role:'testigo', local: 'La Me', table: "2"}];
-      const currentUser = AuthService.getCurrentUser();
-      const user = users.find((element) => element.username === currentUser.username);
-      const t = {local: user.local, number: user.table};
-      setTable(t);
+  const  getAllCandidates =  async () => {
+    const currentUser = await AuthService.getCurrentUser();
+    console.log(currentUser.send);
+    if (!currentUser.role.includes("ROLE_TESTIGO")) {
+      navigate("/");
+    }
+    if (currentUser.send) {
+      navigate("/vote");
+    }
+    FormService.getCandidates().then(response =>{ 
+      const candidas = response.data.data;
       setVoteFields(candidas);
+    }).catch(err => setError(err.message));
+
+    setUsera(currentUser);
+    console.log(usera.username, "1222");
+
+    const t = {local: currentUser.local, number: currentUser.table};
+    setTable(t);
+      
+      // setVoteFields(candidas);
   }
 
-  const navigate = useNavigate();
-
-  const registerVote = (e) => {
+  const registerVote = async (e) => {
     e.preventDefault();
     
-    console.log(voteFields);
-    // FormService.registerVote(
-    //   voteFields, table.number, table.local, total
-    // ).then(
-    //   response => {
-    //     setMessage({
-    //       message: response.data.message,
-    //       successful: true
-    //     });
-    //   }).catch(error => setError(error.message));
-    FormService.registerVote(voteFields, table.number, table.local, total);
+    // console.log(voteFields);
+    await FormService.registerVote(
+      voteFields, table.number, table.local, total
+    ).then(
+      response => {
+        setMessage({
+          message: response.data.message,
+          successful: true
+        });
+      }, 
+      FormService.assingSend(usera.username),
+      await FormService.addEscruter(voteFields, table.local, table.number, total, observations, isChecked)
+      ).catch(error => setError(error.message));
+      
+    if (message.successful) {
+        await FormService.addEscruter(table.local, table.number, total).then(
+        response => {
+          console.log(response.message);
+        }
+      ).catch(err => setError(err.message));
+    }
     navigate("/vote");
-    window.location.reload();    
   }
 
 
@@ -105,7 +133,7 @@ function RegisterVote() {
           <h2>Ingresar Votos Mesa {table.number}</h2>
             <p>{table.local}</p>
          </div>
-         
+         {!usera.send && (
           <Form>
           {message.successful && <p className="text-danger">{message.message}</p>}
           {error && <p className="text-danger">{error}</p>}
@@ -136,13 +164,37 @@ function RegisterVote() {
               )
             })
             }
+            <div className="form-group">
+              <label htmlFor="name">Observaciones</label>
+              <Input
+                type="text"
+                className="form-control"
+                name="observaciones"
+                value={observations}
+                onChange={event => handleObservationsChange(event)}
+                validations={[requiredO]}
+              />
+            </div>
+            <div className="topping">
+              <input
+                className="form-control"
+                type="checkbox"
+                id="topping"
+                name="topping"
+                value="reconteo"
+                checked={isChecked}
+                onChange={handleOnChange}
+              />
+                Hubo reconteo
+            </div>
             <div className="form-group d-flex float-right">
-              <label htmlFor="total" className="mr-3">Total: <span className="span-total">{total}</span></label>
-
+              <label htmlFor="total" className="mr-3">Total Votos Mesa: <span className="span-total">{total}</span></label>
             </div>
             
         <button className="btn btn-primary btn-block" onClick={registerVote}>Enviar</button>
       </Form>
+         )}
+          
       </div>
     </div>
   );

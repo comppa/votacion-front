@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import image from "../persona.jpg"
+import image from "../img/home-image.jpg"
 import UserService from "../services/user.service";
 
 export default class Home extends Component {
@@ -31,12 +31,17 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="">
         <header>
-          <div className="box">
-            <img src={image} className="img-fluid shadow-4" alt="Logo Campaña" ></img>
+        <div className="col-12 d-flex">
+          <div className="col-xs-12 col-sm-10 col-md-7 mt-14 text-home">
+              <h2>Blindaje de votos</h2>
+              <p>Ingresa con tu usuario y contraseña</p>
           </div>
-          <h3>{this.state.content}</h3>
+          <div className="col-xs-12 col-sm-4 col-md-6 text-center mt-7">
+            <img  src={image} height="50" className="img-fluid" alt="Logo Campaña" ></img>
+          </div>
+        </div>
         </header>
       </div>
     );

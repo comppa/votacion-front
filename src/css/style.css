@@ -37,11 +37,26 @@ form .form-group label.vote{
 .center-image img{
     width: 100%;
 }
+
 .wrapper {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr;
   justify-content: center;
+}
+
+.wrapper.t{
+  display: flex;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.t-reponsive{
+  margin-right: 4vw;
+  margin-left: 10vw;
+  margin-top: 22vh;
 }
 
 .jumbutron{
@@ -61,12 +76,64 @@ form .form-group label.vote{
   width: 100%;
 }
 
+.td-votes ul{
+  padding: 0;
+}
+
+.td-votes li{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+
+.td-votes li span{
+  display: block;
+  border-radius: 32px;
+  padding: 0px 18px;
+  font-weight: 600;
+}
+
+.votes td{
+  font-weight: bold;
+}
+
+.votes thead tr th{
+  font-weight: bold;
+}
+
+.clbutton{
+  background-color: #f43e27;
+}
+
+.td-votes li span:first-child{
+  min-width: 17rem;
+  background-color: #fcea50;
+}
+
+.td-votes li span:last-child{
+   background-color:    #870849 ;
+   color: #fff;
+   font-weight: 600;
+}
+
 .card {
   box-shadow: 0 5px 5px 2px #e1e5ee;
   border-radius: 0.2rem;
   min-width: 28rem;
   display: flex;
 }
+
+.card.t{
+  min-width: 7rem;
+}
+
+.pie-grep{
+  min-width: 14rem;
+  padding: 4px 0;
+}
+
+
 .card__img {
   width: 14rem;
   height: 11rem;
@@ -194,7 +261,11 @@ li .submenu{
   transition: max-height 0.75s ease-in;
 }
 
-@media screen and (min-width: 400px) {
+.d-flex{
+  display: flex !important;
+}
+
+@media screen and (max-width: 400px) {
   .wrapper {
     grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
   }
@@ -207,10 +278,29 @@ li .submenu{
     width: 100%;
     height: 12rem;
   }
+
+  .d-flex{
+    display: block !important;
+  }
+
+  .text-home h2{
+    font-size: 2.5rem !important;
+    color: #FF8040;
+    text-align: center; 
+  }
+
+  .mt-14{
+    margin-top: 6rem;
+  }
+
+  .mt-7 {
+    margin-top: 2rem !important;
+  }
+
 }
 
 
-@media screen and (min-width: 300px) {
+@media screen and (max-width: 300px) {
   .wrapper {
     grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
   }
@@ -222,6 +312,33 @@ li .submenu{
   .card__img {
     width: 100%;
     height: 12rem;
+  }
+
+  .d-flex{
+    display: block !important;
+  }
+
+  .text-home h2 {
+    font-size: 1.7rem !important;
+  }
+
+  .text-home p {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 198px) {
+
+  .d-flex{
+    display: block !important;
+  }
+
+  .text-home h2 {
+    font-size: 1.5rem;
+  }
+
+  .text-home p {
+    font-size: 0.7rem;
   }
 }
 

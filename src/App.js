@@ -3,7 +3,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/App.css";
 import "./css/style.css";
-import Logo from './newlogo.png';
+import "./js/script.js";
+import image from './img/home-image.jpg';
 
 import AuthService from "./services/auth.service";
 
@@ -19,28 +20,33 @@ import Users from "./components/auth/users.component";
 import Graphics from "./components/chart/graphics.component";
 import Tables from "./components/table/table.component";
 import Vote from "./components/vote/vote.component";
+import EditVote from "./components/vote/edit-vote.component";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
+    this.assing = this.assing.bind(this);
 
     this.state = {
       showModeratorBoard: false,
+      showTestigoBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
+      isActive: false
     };
   }
 
-  componentDidMount() {
-    const user = AuthService.getCurrentUser();
-
+  async componentDidMount() {
+    const user = await AuthService.getCurrentUser();
     if (user) {
       this.setState({
         currentUser: user,
+        send: user.send,
         showModeratorBoard: user.role.includes("ROLE_CANDIDATE"),
         showTestigoBoard: user.role.includes("ROLE_TESTIGO"),
         showAdminBoard: user.role.includes("ROLE_ADMIN"),
+        showCoordiBoard: user.role.includes("ROLE_COORDINADOR")
       });
     }
   }
@@ -51,12 +57,23 @@ class App extends Component {
       showModeratorBoard: false,
       showTestigoBoard: false,
       showAdminBoard: false,
+      showCoordiBoard: false,
       currentUser: undefined,
+      send: false,
     });
+
+   
   }
 
+  assing(){
+    // document.querySelectorAll('list-group-item').classList.remove('active');
+    this.setState({
+      isActive: true
+    });
+   }
+
   render() {
-    const { currentUser, showModeratorBoard, showTestigoBoard, showAdminBoard } = this.state;
+    const { currentUser, showModeratorBoard, showTestigoBoard, showAdminBoard, showCoordiBoard, send } = this.state;
 
     return (
       <div>
@@ -67,16 +84,16 @@ class App extends Component {
           <div className="position-sticky">
 
               <div className="list-group list-group-flush mx-3 mt-4">
-                {showAdminBoard && (
+                {showAdminBoard  && (
                   <li className="list-group-item list-group-item-action py-2 ripple">
                     <Link to={"/graphics"} className="list-group-item list-group-item-action py-2 border0 ripple" aria-current="true">
                      <i className="fas fa-tachometer-alt fa-fw me-3"></i> <span>Votacion</span>
                     </Link>
-                    <Link to={"/Tables"} className="list-group-item list-group-item-action border0 py-2 ripple">
+                    <Link to={"/tables"} className="list-group-item list-group-item-action border0 py-2 ripple">
                     <i className="fas fa-tachometer-alt fa-fw me-3"></i><span> Mesas</span>
                     </Link>
                     <a href="/users" className="list-group-item list-group-item-action border0 py-2 ripple"><i
-                    className="fas fa-users fa-fw me-3"></i><span>Usuiarios</span></a>
+                    className="fas fa-users fa-fw me-3"></i><span>Usuarios</span></a>
                   </li>
                 )}
                 {showModeratorBoard && (
@@ -85,13 +102,31 @@ class App extends Component {
                      <i className="fas fa-tachometer-alt fa-fw me-3"></i> <span>Votacion</span>
                     </Link>
                   </li>
-                  
                 )}
-                {showTestigoBoard && (
-                  <div>
-                    <a href="/addvote" className="list-group-item list-group-item-action py-2 border  0 ripple">
-                    <i className="fas fa-chart-area fa-fw me-3"></i><span> Agregar Voto</span></a>
+                {(showTestigoBoard && send ) &&(
+                    <div>
+                    <a href="/vote"  className={`list-group-item list-group-item-action py-2 border  0 ripple`}>
+                    <i className="fas fa-chart-area fa-fw me-3"></i><span>Voto</span></a>
                   </div>
+                )}
+                {(!send && showTestigoBoard ) &&(
+                    <div>
+                      <a href="/addvote"  className={`list-group-item list-group-item-action py-2 border  0 ripple`}>
+                      <i className="fas fa-chart-area fa-fw me-3"></i><span> Agregar Voto</span></a>
+                    </div>
+                  
+                  )}
+                {showCoordiBoard && (
+                  <li className="list-group-item list-group-item-action py-2 ripple">
+                    <Link to={"/graphics"} className="list-group-item list-group-item-action py-2 border0 ripple" aria-current="true">
+                     <i className="fas fa-tachometer-alt fa-fw me-3"></i> <span>Votacion</span>
+                    </Link>
+                    <Link to={"/tables"} className="list-group-item list-group-item-action border0 py-2 ripple">
+                    <i className="fas fa-tachometer-alt fa-fw me-3"></i><span> Mesas</span>
+                    </Link>
+                    <a href="/users" className="list-group-item list-group-item-action border0 py-2 ripple"><i
+                    className="fas fa-users fa-fw me-3"></i><span>Usuarios</span></a>
+                  </li>
                 )}
 
                 {/* <li className="nav-item has-submenu">
@@ -173,7 +208,7 @@ class App extends Component {
           </button>
 
           <a className="navbar-brand" href="/">
-            <img src={Logo} height="50" alt="Logo"
+            <img  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" height="50" alt="Logo"
               loading="lazy" />
           </a>
           
@@ -196,24 +231,14 @@ class App extends Component {
                 </li>
               </ul>
             </li> */}
-            <div className="user-options d-flex">
+            <div className="user-options d-flex align-items-center">
               <a href="/" className="line-logout" onClick={this.logOut}>
                 <i className="fas fa-sign-out fa-fw me-1"></i><span>Salir</span>
                 </a>
-              <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="/"
-                  id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" height="30" alt="Logo"
+                <Link to={"/profile"} className="ml-3">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" height="30" alt="Logo"
                   loading="lazy" fluid />
-                </a>
-                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                  <Link to={"/profile"} className="dropdown-item">
-                    {currentUser.username}
-                   </Link>
-                  </li>
-                </ul>
-              </li>
+                </Link>
             </div>
 
             </ul>
@@ -227,7 +252,7 @@ class App extends Component {
             <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top" >
               <div className="container-fluid">
               <a className="navbar-brand" href="#">
-                <img src={Logo} width="50" alt="Logo"
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp"  width="40" alt="Logo"
                   loading="lazy" fluid />
               </a>
                 <ul className="navbar-nav ms-auto d-flex flex-row">
@@ -256,6 +281,7 @@ class App extends Component {
             <Route path="/graphics" element={<Graphics />} />
             <Route path="/tables" element={<Tables />} />
             <Route path="/vote" element={<Vote />} />
+            <Route path="/editvote" element={<EditVote />} />
 
           </Routes>
         </div>

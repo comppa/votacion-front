@@ -10,15 +10,16 @@ export default class Profile extends Component {
     this.state = {
       redirect: null,
       userReady: false,
+      showTestigoBoard: false,
       currentUser: { username: "" }
     };
   }
 
-  componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
-
+  async componentDidMount() {
+    const currentUser = await AuthService.getCurrentUser();
+    
     if (!currentUser) this.setState({ redirect: "/home" });
-    this.setState({ currentUser: currentUser, userReady: true })
+    this.setState({ currentUser: currentUser, userReady: true , showTestigoBoard: currentUser.role.includes("ROLE_TESTIGO"), })
   }
 
   render() {
@@ -26,7 +27,7 @@ export default class Profile extends Component {
       return <Navigate to={this.state.redirect} />
     }
 
-    const { currentUser } = this.state;
+    const { currentUser, showTestigoBoard } = this.state;
 
     return (
       <div className="">
@@ -40,14 +41,16 @@ export default class Profile extends Component {
                     <MDBCol md="4" className="gradient-custom text-center text-white"
                       style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
                       <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp"
-                        alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
+                        alt="Avatar" className="my-3" style={{ width: '80px' }} fluid />
                       <MDBTypography tag="h5">{currentUser.name}</MDBTypography>
-                      <MDBCardText>{currentUser.role }</MDBCardText>
-                      <MDBIcon far icon="edit mb-5" />
+                      <MDBCardText>cc: {currentUser.nit}</MDBCardText>
+                      <MDBCardText>{currentUser.role.split('_')[1] }</MDBCardText>
                     </MDBCol>
                     <MDBCol md="8">
                       <MDBCardBody className="p-4">
-                        <MDBTypography tag="h6">Informacion</MDBTypography>
+                      {showTestigoBoard && (
+                        <div>
+                        <MDBTypography tag="h6">Informacion:</MDBTypography>
                         <hr className="mt-0 mb-4" />
                         <MDBRow className="pt-1">
                           <MDBCol size="6" className="mb-3">
@@ -59,12 +62,17 @@ export default class Profile extends Component {
                             <MDBCardText className="text-muted">{currentUser.table}</MDBCardText>
                           </MDBCol>
                         </MDBRow>
-    
-                        <MDBTypography tag="h6">Informacion</MDBTypography>
+                        </div>
+                        )}
+                        <MDBTypography tag="h6">Informacion:</MDBTypography>
                         <hr className="mt-0 mb-4" />
                         <MDBRow className="pt-1">
+                        <MDBCol size="6" className="mb-3">
+                            <MDBTypography tag="h6">Usuario</MDBTypography>
+                            <MDBCardText className="text-muted">{currentUser.username}</MDBCardText>
+                          </MDBCol>
                           <MDBCol size="6" className="mb-3">
-                            <MDBTypography tag="h6">Phone</MDBTypography>
+                            <MDBTypography tag="h6">Celular</MDBTypography>
                             <MDBCardText className="text-muted">{currentUser.phone}</MDBCardText>
                           </MDBCol>
                         </MDBRow>
