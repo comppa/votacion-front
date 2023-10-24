@@ -19,9 +19,9 @@ class FormService {
     });
   }
 
-  addEscruter(local, table, total, observations, ischecked){
+  addEscruter(votes, local, table, total, observations, ischecked){
     return axios.post(API_URL +  "addescruter", {
-      local, table, total, observations, ischecked
+      votes, local, table, total, observations, ischecked
     }) 
   }
 

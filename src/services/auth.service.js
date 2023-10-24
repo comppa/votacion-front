@@ -59,8 +59,12 @@ class AuthService {
   getUsers(){
     return axios.get("http://localhost:8080/api/" + "users");
   }
-  getUsersCo(){
-    return axios.get("http://localhost:8080/api/" + "usersco");
+  getUsersCo(local){
+    return axios.get("http://localhost:8080/api/" + "usersco", {
+      params: {
+        local: local
+      }
+    });
   }
 
   async getCurrentUser() {

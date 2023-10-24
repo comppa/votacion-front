@@ -39,6 +39,7 @@ function RegisterVote() {
   const [table, setTable] = useState({});
   const [usera, setUsera] = useState({});
   const [total, setTotal] = useState();
+  const [votes, setVotes] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
@@ -112,16 +113,16 @@ function RegisterVote() {
         });
       }, 
       FormService.assingSend(usera.username),
-      await FormService.addEscruter(voteFields, table.local, table.number, total, observations, isChecked)
+      await FormService.addEscruter(votes, table.local, table.number, total, observations, isChecked)
       ).catch(error => setError(error.message));
       
-    if (message.successful) {
-        await FormService.addEscruter(table.local, table.number, total).then(
-        response => {
-          console.log(response.message);
-        }
-      ).catch(err => setError(err.message));
-    }
+    // if (message.successful) {
+    //     await FormService.addEscruter(table.local, table.number, total).then(
+    //     response => {
+    //       console.log(response.message);
+    //     }
+    //   ).catch(err => setError(err.message));
+    // }
     navigate("/vote");
   }
 
@@ -177,7 +178,7 @@ function RegisterVote() {
             </div>
             <div className="topping">
               <input
-                className="form-control"
+                className="mr-1"
                 type="checkbox"
                 id="topping"
                 name="topping"

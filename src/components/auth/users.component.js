@@ -13,12 +13,11 @@ export default class Users extends Component {
     };
   }
 
-  componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
+  async componentDidMount() {
+    const currentUser =  await AuthService.getCurrentUser();
     
     if (currentUser.role.includes('ROLE_ADMIN')) {
       AuthService.getUsers().then(response => {
-        console.log(response.data.data);
         this.setState({
                 users: response.data.data
             });
@@ -37,8 +36,7 @@ export default class Users extends Component {
     }
 
     if (currentUser.role.includes("ROLE_COORDINADOR")) {
-      AuthService.getUsersCo().then(response => {
-        console.log(response.data.data);
+      AuthService.getUsersCo(currentUser.local).then(response => {
         this.setState({
                 users: response.data.data
             });
@@ -56,7 +54,6 @@ export default class Users extends Component {
     );
     }
     
-    console.log(this.state.users);
   }
 
   
@@ -65,7 +62,7 @@ export default class Users extends Component {
       <div className="card card-container t">
         <div>
           <div className="text-right">
-              <a href="/singup" className="btn btn-success">Agregar Usuario</a>
+              {/* <a href="/singup" className="btn btn-success">Agregar Usuario</a> */}
             </div>
           <h3>Usuarios</h3>
           
@@ -82,7 +79,6 @@ export default class Users extends Component {
             <th>Rol</th>
             <th>Zona</th>
             <th>Mesa</th>
-            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
