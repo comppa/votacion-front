@@ -120,7 +120,6 @@ form .form-group label.vote{
 .card {
   box-shadow: 0 5px 5px 2px #e1e5ee;
   border-radius: 0.2rem;
-  min-width: 28rem;
   display: flex;
 }
 
@@ -226,7 +225,12 @@ form .form-group label.vote{
   opacity: 1;
 }
 
-
+.hidden{
+  display: none;
+}
+.f-right{
+  float: right;
+}
 .nav-links li .sub-menu .link_name{
   display: none;
 }
@@ -265,6 +269,16 @@ li .submenu{
   display: flex !important;
 }
 
+@media screen and (max-width: 700px) {
+  
+
+  .mt-14{
+    margin-top: 8rem;
+  }
+
+
+}
+
 @media screen and (max-width: 400px) {
   .wrapper {
     grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
@@ -272,7 +286,6 @@ li .submenu{
 
   .card {
     flex-direction: column;
-    min-width: 24rem;;
   }
   .card__img {
     width: 100%;
@@ -297,6 +310,10 @@ li .submenu{
     margin-top: 2rem !important;
   }
 
+  .hidden-sm{
+    display: none !important;
+  }
+
 }
 
 
@@ -307,7 +324,6 @@ li .submenu{
 
   .card {
     flex-direction: column;
-    min-width: 16rem;;
   }
   .card__img {
     width: 100%;

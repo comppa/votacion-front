@@ -255,8 +255,8 @@ const configPie = {
             <tr              key={row._id}
               scope="row"
             >
-              <td>{row.nit}</td>
-              <td>{row.name}</td>
+             <td>{row.number}</td>
+             <td>{row.local.name}</td>
             </tr>
           ))}
           

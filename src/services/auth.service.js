@@ -1,12 +1,13 @@
 import axios from "axios";
 import authHeader from './auth-header';
 
-const API_URL = "http://localhost:8080/api/auth/";
+// const API_URL = "https://bello.jpweb.com.co:8080/api/";
+const API_URL = "http://localhost:8080/api/";
 
 class AuthService {
   login(username, password) {
     return axios
-      .post(API_URL + "signin", {
+      .post(API_URL + "auth/signin", {
         username,
         password
       })
@@ -40,11 +41,24 @@ class AuthService {
 
 
   logout() {
+    let current = JSON.parse(localStorage.getItem('user'));
     localStorage.removeItem("user");
+    if (current) {
+      return axios
+      .get(API_URL + "auth/logout", {
+        params: {
+          username: current.username
+        }
+      })
+      .then(response => {
+          // localStorage.removeItem("user");
+      });
+    }
+
   }
 
   register(nit, name, phone, username, password, local, table, role) {
-    return axios.post(API_URL + "signup", {
+    return axios.post(API_URL + "auth/signup", {
       nit,
       name,
       phone,
@@ -57,21 +71,22 @@ class AuthService {
   }
 
   getUsers(){
-    return axios.get("http://localhost:8080/api/" + "users");
+    return axios.get(API_URL + "users");
   }
   getUsersCo(local){
-    return axios.get("http://localhost:8080/api/" + "usersco", {
+    return axios.get(API_URL + "usersco", {
       params: {
         local: local
       }
     });
   }
 
-  async getCurrentUser() {
+  getCurrentUser() {
     let current = JSON.parse(localStorage.getItem('user'));
+    // console.log(current);
     if (current) {
       return axios
-      .get(API_URL + "user", {
+      .get(API_URL + "auth/user", {
         params: {
           username: current.username
         }
@@ -80,14 +95,9 @@ class AuthService {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-        // console.log(response.data);
-        return response.data;
+        return JSON.parse(localStorage.getItem('user'));
       });
-    } else{
-      return JSON.parse(localStorage.getItem('user'));
-    }
-    
-    
+    } 
   }
 
 

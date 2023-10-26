@@ -43,7 +43,7 @@ class App extends Component {
       this.setState({
         currentUser: user,
         send: user.send,
-        showModeratorBoard: user.role.includes("ROLE_CANDIDATE"),
+        showModeratorBoard: user.role.includes("ROLE_CANDIDATO"),
         showTestigoBoard: user.role.includes("ROLE_TESTIGO"),
         showAdminBoard: user.role.includes("ROLE_ADMIN"),
         showCoordiBoard: user.role.includes("ROLE_COORDINADOR")
@@ -59,7 +59,7 @@ class App extends Component {
       showAdminBoard: false,
       showCoordiBoard: false,
       currentUser: undefined,
-      send: false,
+      send: false
     });
 
    

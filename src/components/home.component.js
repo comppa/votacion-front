@@ -33,7 +33,7 @@ export default class Home extends Component {
     return (
       <div className="">
         <header>
-        <div className="col-12 d-flex">
+        <div className="col-12 d-sm-flex d-md-flex">
           <div className="col-xs-12 col-sm-10 col-md-7 mt-14 text-home">
               <h2>Blindaje de votos</h2>
               <p>Ingresa con tu usuario y contraseña</p>

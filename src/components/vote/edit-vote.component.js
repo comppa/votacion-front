@@ -134,6 +134,10 @@ function EditVote() {
           <h2>Ingresar Votos Mesa {table.number}</h2>
             <p>{table.local}</p>
          </div>
+         <div className="col-md-12 d-flex hidden-sm">
+            <h5 className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">Candidato</h5>
+            <h5 className="col-xs-6 col-sm-6 col-md-6 col-lg-6">Votos</h5>
+         </div>
          {(
           <Form>
           {message.successful && <p className="text-danger">{message.message}</p>}
@@ -142,9 +146,12 @@ function EditVote() {
               return (
                 <div key={index}>
                   <div className="form-group d-flex">
+                  <label className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                  {input.candidate}
+                  </label>
                     <Input
                       name='name'
-                      className="form-control vote"
+                      className="form-control vote hidden"
                       placeholder={input.candidate}
                       value={input.candidate}
                       onChange={event => handleFormChange(index, event)}
@@ -153,7 +160,7 @@ function EditVote() {
                     <Input
                       type="number"
                       name='cant'
-                      className="form-control"
+                      className="form-control col-xs-12 col-sm-12 col-md-12 col-lg-12"
                       placeholder='Cantidad'
                       value={input.cant}
                       onChange={event => handleFormChange(index, event)}

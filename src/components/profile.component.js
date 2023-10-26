@@ -15,8 +15,9 @@ export default class Profile extends Component {
     };
   }
 
-  async componentDidMount() {
+   async componentDidMount() {
     const currentUser = await AuthService.getCurrentUser();
+    console.log(currentUser);
     
     if (!currentUser) this.setState({ redirect: "/home" });
     this.setState({ currentUser: currentUser, userReady: true , showTestigoBoard: currentUser.role.includes("ROLE_TESTIGO"), })
