@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/App.css";
 import "./css/style.css";
 import "./js/script.js";
-import image from './img/home-image.jpg';
+import image from './img/ava6.webp';
 
 import AuthService from "./services/auth.service";
 
@@ -21,6 +21,8 @@ import Graphics from "./components/chart/graphics.component";
 import Tables from "./components/table/table.component";
 import Vote from "./components/vote/vote.component";
 import EditVote from "./components/vote/edit-vote.component";
+import { Navigate } from "react-router-dom";
+
 
 class App extends Component {
   constructor(props) {
@@ -208,7 +210,7 @@ class App extends Component {
           </button>
 
           <a className="navbar-brand" href="/">
-            <img  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" height="50" alt="Logo"
+            <img  src={image} height="50" alt="Logo"
               loading="lazy" />
           </a>
           
@@ -236,7 +238,7 @@ class App extends Component {
                 <i className="fas fa-sign-out fa-fw me-1"></i><span>Salir</span>
                 </a>
                 <Link to={"/profile"} className="ml-3">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp" height="30" alt="Logo"
+                <img src={image} height="30" alt="Logo"
                   loading="lazy" fluid />
                 </Link>
             </div>
@@ -251,8 +253,8 @@ class App extends Component {
           <div>
             <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top" >
               <div className="container-fluid">
-              <a className="navbar-brand" href="#">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp"  width="40" alt="Logo"
+              <a className="navbar-brand" href="/">
+                <img src={image}  width="40" alt="Logo"
                   loading="lazy" fluid />
               </a>
                 <ul className="navbar-nav ms-auto d-flex flex-row">

@@ -7,7 +7,10 @@ import UtilService from '../../services/util.service';
 import { useState, useEffect } from 'react';
 import { render } from '@testing-library/react';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import AuthService from "../../services/auth.service";
+import {useNavigate} from 'react-router-dom';
+
+
 
 
 
@@ -75,7 +78,10 @@ const config = {
         const totalValue = datapoints.reduce(totalSum, 0)
         const percentageValue = (value / totalValue * 100).toFixed(1)
         // console.log(percentageValue);
-        const display = [`${value}, ${percentageValue}%`];
+        let display = [`0, 0%`];
+        if (value != undefined) {
+           display = [`${value}, ${percentageValue}%`];
+        }
         return display;
       },
       
@@ -148,40 +154,50 @@ const configPie = {
   const [pie, setPie] = useState([]);
   const [scrit, setScrit] = useState([]);
   const [nscrit, setNscrit] = useState([]);
+  const navigate = useNavigate();
 
 
   //put the setinterval for this and out the request awit from useEffect method
   useEffect(() => {
-    FormService.getCandidatesAndVotes().then(response => {
-      // console.log(response.data.data);
-      setCandidate(response.data.data);
-      })
-      .catch(error => {
-        // Handle errors
-      });
-      UtilService.getPie().then(response => {
+    const currentUser = AuthService.getCurrentUser();
+    // console.log(currentUser);
+    try {
+      if (currentUser.send) {
+        navigate("/");
+      }
+      FormService.getCandidatesAndVotes().then(response => {
         // console.log(response.data.data);
-        setPie(response.data.data);
+        setCandidate(response.data.data);
         })
         .catch(error => {
           // Handle errors
         });
-
-      UtilService.getScrti().then(response => {
-        // console.log(response.data.data);
-        setScrit(response.data.data);
-        })
-        .catch(error => {
-          // Handle errors
-        });
-
-      UtilService.getNScrti().then(response => {
-        // console.log(response.data.data);
-        setNscrit(response.data.data);
-        })
-        .catch(error => {
-          // Handle errors
-        });
+        UtilService.getPie().then(response => {
+          // console.log(response.data.data);
+          setPie(response.data.data);
+          })
+          .catch(error => {
+            // Handle errors
+          });
+  
+        UtilService.getScrti().then(response => {
+          // console.log(response.data.data);
+          setScrit(response.data.data);
+          })
+          .catch(error => {
+            // Handle errors
+          });
+  
+        UtilService.getNScrti().then(response => {
+          console.log(response.data.data);
+          setNscrit(response.data.data);
+          })
+          .catch(error => {
+            // Handle errors
+          });
+    } catch (error) {
+      navigate("/");
+    }
   }, []);
 
   if (candidate.length !== 0) { 

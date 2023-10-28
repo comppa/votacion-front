@@ -17,10 +17,14 @@ export default class Profile extends Component {
 
    async componentDidMount() {
     const currentUser = await AuthService.getCurrentUser();
-    console.log(currentUser);
-    
-    if (!currentUser) this.setState({ redirect: "/home" });
-    this.setState({ currentUser: currentUser, userReady: true , showTestigoBoard: currentUser.role.includes("ROLE_TESTIGO"), })
+    // console.log(currentUser);
+    try {
+      if (!currentUser) this.setState({ redirect: "/" });
+      this.setState({ currentUser: currentUser, userReady: true , showTestigoBoard: currentUser.role.includes("ROLE_TESTIGO")})
+    } catch (error) {
+      <Navigate to="/" />
+    }
+
   }
 
   render() {

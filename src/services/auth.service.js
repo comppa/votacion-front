@@ -2,7 +2,9 @@ import axios from "axios";
 import authHeader from './auth-header';
 
 // const API_URL = "https://bello.jpweb.com.co:8080/api/";
-const API_URL = "http://localhost:8080/api/";
+// const API_URL = "http://localhost:8080/api/";
+// const API_URL = "https://caucasia.jpweb.com.co:8080/api/";
+const API_URL = "https://barbosa.jpweb.com.co:8080/api/";
 
 class AuthService {
   login(username, password) {
@@ -42,19 +44,18 @@ class AuthService {
 
   logout() {
     let current = JSON.parse(localStorage.getItem('user'));
-    localStorage.removeItem("user");
-    if (current) {
       return axios
       .get(API_URL + "auth/logout", {
         params: {
           username: current.username
         }
       })
-      .then(response => {
-          // localStorage.removeItem("user");
+      .then(response => 
+        {localStorage.removeItem("user");
+        localStorage.clear();})
+      .catch(error => {
+          console.error('Error:', error);
       });
-    }
-
   }
 
   register(nit, name, phone, username, password, local, table, role) {
@@ -83,21 +84,32 @@ class AuthService {
 
   getCurrentUser() {
     let current = JSON.parse(localStorage.getItem('user'));
-    // console.log(current);
-    if (current) {
-      return axios
-      .get(API_URL + "auth/user", {
-        params: {
-          username: current.username
-        }
-      })
-      .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-        return JSON.parse(localStorage.getItem('user'));
-      });
-    } 
+    try {
+      if (!current.sign) {
+        localStorage.removeItem("user");
+        return;
+      }
+      if (current) {
+        console.log(current);
+        return axios
+        .get(API_URL + "auth/user", {
+          params: {
+            username: current.username
+          }
+        })
+        .then(response => {
+          if (response.data.accessToken) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+          }
+          return JSON.parse(localStorage.getItem('user'));
+        });
+      } 
+    } catch (error) {
+      localStorage.removeItem("user");
+      localStorage.clear();
+      return;
+    }
+    
   }
 
 

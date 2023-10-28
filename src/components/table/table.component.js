@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
 
+import { Navigate } from "react-router-dom";
+import AuthService from "../../services/auth.service";
+
 // import FormService from "../../services/form.service";
 import UtilService from "../../services/util.service";
+import {useNavigate} from 'react-router-dom';
+
 
 
 
@@ -19,8 +24,10 @@ export default class Tables extends Component {
       };
     }
   
-    componentDidMount() {
-      UtilService.getVotes().then(
+    async componentDidMount() {
+    const currentUser = await AuthService.getCurrentUser();
+    try {
+      UtilService.getVotes(currentUser.username).then(
         response => {
           this.setState({
             results: response.data.data
@@ -35,7 +42,10 @@ export default class Tables extends Component {
           });
         }
       );
-
+    } catch (error) {
+      <Navigate to="/"/>
+    }
+      
       // console.log(this.state.locals);
     }
 
@@ -55,6 +65,12 @@ export default class Tables extends Component {
                 </div>
               </div>
               ))}
+              <div className="d-flex">
+                  <p className="col-10 card__description">TOTAL</p>
+                  <h3 className="card__price">{(props.votes.reduce( function totalSum(total, datapoint) {
+        return total + datapoint.cant
+      }, 0))}</h3>
+                </div>
             </div>
             ): (
               <div className="d-flex">
@@ -67,7 +83,9 @@ export default class Tables extends Component {
     }
   
     render() {
-
+      function totalSum(total, datapoint) {
+        return total + datapoint.cant
+      }
       if (this.state.results) {
         console.log(this.state.results);
       }
@@ -84,6 +102,7 @@ export default class Tables extends Component {
                   <this.Card
                       title= {"MESA " + table.number}
                       votes= {table.votes}
+                      total={table.tvotes}
                     />
                 ))}
               </div>    

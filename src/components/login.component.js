@@ -3,7 +3,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
-
+import image from '../img/ava6.webp';
+import {Icon} from 'react-icons-kit';
+import {eyeOff} from 'react-icons-kit/feather/eyeOff';
+import {eye} from 'react-icons-kit/feather/eye'
 import { withRouter } from '../common/with-router';
 
 const required = value => {
@@ -22,12 +25,15 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
 
     this.state = {
       username: "",
       password: "",
       success: false,
-      message: ""
+      message: "",
+      type: 'password',
+      icon: eyeOff
     };
   }
 
@@ -42,6 +48,20 @@ class Login extends Component {
       password: e.target.value
     });
   }
+
+  handleToggle(e) {
+    if (this.state.type==='password'){
+      this.setState({
+        icon: eye,
+        type: 'text'
+      });
+    } else {
+      this.setState({
+        icon: eyeOff,
+        type: 'password'
+      });
+    }
+ }
 
   handleLogin(e) {
     e.preventDefault();
@@ -89,7 +109,7 @@ class Login extends Component {
       <div className="col-md-12">
         <div className="card card-container">
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6.webp"
+            src={image}
             alt="profile-img"
             className="profile-img-card"
           />
@@ -115,13 +135,17 @@ class Login extends Component {
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
               <Input
-                type="password"
+                type={this.state.type}
                 className="form-control"
                 name="password"
                 value={this.state.password}
                 onChange={this.onChangePassword}
                 validations={[required]}
+                
               />
+              <span class="d-flex justify-right items-center" onClick={this.handleToggle}>
+                  <Icon class="absolute mb-4 mr-2" icon={this.state.icon} size={25}/>
+              </span>
             </div>
 
             <div className="form-group">

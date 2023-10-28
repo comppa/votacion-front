@@ -78,24 +78,27 @@ function RegisterVote() {
 
   const  getAllCandidates =  async () => {
     const currentUser = await AuthService.getCurrentUser();
-    console.log(currentUser.send);
-    if (!currentUser.role.includes("ROLE_TESTIGO")) {
+    // console.log(currentUser.send);
+    try {
+      if (!currentUser.role.includes("ROLE_TESTIGO")) {
+        navigate("/");
+      }
+      if (currentUser.send) {
+        navigate("/vote");
+      }
+        FormService.getCandidates().then(response =>{ 
+          const candidas = response.data.data;
+          setVoteFields(candidas);
+        }).catch(err => setError(err.message));
+    
+        setUsera(currentUser);
+        console.log(usera.username, "1222");
+    
+        const t = {local: currentUser.local, number: currentUser.table};
+        setTable(t);
+    } catch (error) {
       navigate("/");
-    }
-    if (currentUser.send) {
-      navigate("/vote");
-    }
-    FormService.getCandidates().then(response =>{ 
-      const candidas = response.data.data;
-      setVoteFields(candidas);
-    }).catch(err => setError(err.message));
-
-    setUsera(currentUser);
-    console.log(usera.username, "1222");
-
-    const t = {local: currentUser.local, number: currentUser.table};
-    setTable(t);
-      
+    } 
       // setVoteFields(candidas);
   }
 
