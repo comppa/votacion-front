@@ -24,10 +24,9 @@ export default class Tables extends Component {
       };
     }
   
-    async componentDidMount() {
-    const currentUser = await AuthService.getCurrentUser();
-    try {
-      UtilService.getVotes(currentUser.username).then(
+    componentDidMount() {
+    
+      UtilService.getVotes().then(
         response => {
           this.setState({
             results: response.data.data
@@ -42,9 +41,7 @@ export default class Tables extends Component {
           });
         }
       );
-    } catch (error) {
-      <Navigate to="/"/>
-    }
+    
       
       // console.log(this.state.locals);
     }

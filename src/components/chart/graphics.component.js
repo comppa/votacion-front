@@ -161,10 +161,6 @@ const configPie = {
   useEffect(() => {
     const currentUser = AuthService.getCurrentUser();
     // console.log(currentUser);
-    try {
-      if (currentUser.send) {
-        navigate("/");
-      }
       FormService.getCandidatesAndVotes().then(response => {
         // console.log(response.data.data);
         setCandidate(response.data.data);
@@ -195,9 +191,7 @@ const configPie = {
           .catch(error => {
             // Handle errors
           });
-    } catch (error) {
-      navigate("/");
-    }
+
   }, []);
 
   if (candidate.length !== 0) { 
